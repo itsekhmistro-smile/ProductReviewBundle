@@ -1,0 +1,19 @@
+api:
+    entity_aliases:
+        Smile\Bundle\ProductReviewBundle\Entity\ProductReview:
+            alias: productreview
+            plural_alias: productreview
+
+    entities:
+        Smile\Bundle\ProductReviewBundle\Entity\ProductReview:
+            fields:
+                authorDisplayName:
+                    property_path: author
+            max_results: 25
+            order_by:
+                id: DESC
+            actions:
+                create: false
+                update: false
+                delete_list: false
+                delete: false

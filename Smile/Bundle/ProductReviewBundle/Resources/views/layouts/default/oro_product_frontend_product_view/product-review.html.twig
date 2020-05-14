@@ -1,0 +1,23 @@
+{% block _product_review_widget %}
+    {% if is_granted('frontend_review_view') %}
+        <div class="product-view__review">
+            {% if productRating is defined and productRating is not null %}
+                <div
+                        data-page-component-module="productreview/js/app/components/rating-component"
+                        data-rate-value="{{ productRating }}"
+                        class="star-review"
+                >
+                    <p class="product-raiting__title">
+                        {% if countReviews is defined and countReviews %}
+                           ({{ countReviews }})
+                        {% else %}
+                            (0)
+                        {% endif %}
+                    </p>
+                </div>
+            {% else %}
+                <p>{{ 'oro.translation.product_review_widget.empty'|trans }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+layout:
+    actions:
+        #Product rating
+        - '@add':
+            parentId: product_view_primary_container
+            id: product-review
+            blockType: container
+            prepend: true
+            options:
+                vars:
+                    productRating: '=data["smile_product"].getRating(data["product"])'
+                    countReviews: '=data["smile_product"].getCountReviews(data["product"])'
+        - '@setBlockTheme':
+            themes: product-review.html.twig
+
+        #Create product review form
+        - '@add':
+            parentId: product_view_main_container
+            id: product-review-form
+            blockType: container
+            options:
+                vars:
+                    form: '=data["product_review_form"].getProductReviewFormView(data["product"])'
+                    isGoogleRecaptchaSettingsValid: '=data["product_review_form"].isGoogleRecaptchaSettingsValid()'
+                    googleRecaptchaSiteKey: '=data["product_review_form"].getGoogleRecaptchaSiteKey()'
+        - '@setBlockTheme':
+            themes: product-review-form.html.twig
+
+        #Product review list
+        - '@add':
+            parentId: product_view_container
+            id: product-review-list
+            blockType: container
+            options:
+                vars:
+                    productId: '=data["smile_product"].getProductId(data["product"])'
+                    productRating: '=data["smile_product"].getRating(data["product"])'
+        - '@setBlockTheme':
+           themes: product-review-list.html.twig
+        - '@move':
+            id:  product-review-list
+            siblingId: product_view_additional_container
+
+        #Google recaptcha script
+        -   '@add':
+                parentId: scripts_before
+                id: google-recaptcha-script
+                blockType: container
+                options:
+                    vars:
+                        isGoogleRecaptchaSettingsValid: '=data["product_review_form"].isGoogleRecaptchaSettingsValid()'
+        -   '@setBlockTheme':
+                themes: google-recaptcha-script.html.twig
+        - '@appendOption':
+            id: page_main
+            optionName: attr.class
+            optionValue: page-main--single-product

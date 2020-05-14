@@ -1,0 +1,12 @@
+acls:
+    frontend_review_view:
+        type: entity
+        class: ProductReviewBundle:ProductReview
+        permission: VIEW
+        group_name: "commerce"
+
+    frontend_review_create:
+        type: entity
+        class: ProductReviewBundle:ProductReview
+        permission: CREATE
+        group_name: "commerce"

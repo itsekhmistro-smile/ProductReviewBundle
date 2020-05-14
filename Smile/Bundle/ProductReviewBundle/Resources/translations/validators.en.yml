@@ -1,0 +1,8 @@
+smile_product_review:
+    validators:
+        is_google_recaptcha_valid.message: 'recaptcha - google recaptcha is not valid.'
+        rating.not_blank: 'rating - this value should not be blank.'
+        author.not_blank: 'author - this value should not be blank.'
+        product.not_blank: 'product - this value should not be blank.'
+        recaptcha.not_blank: 'recaptcha - this value should not be blank.'
+        rating.not_in_range: 'rating - this value should be between 1 and 5.'

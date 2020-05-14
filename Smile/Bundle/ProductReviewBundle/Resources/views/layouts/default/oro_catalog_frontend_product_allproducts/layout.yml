@@ -1,0 +1,13 @@
+layout:
+    actions:
+        - '@add':
+            parentId: product_datagrid_row_product_specification
+            id: product-review-catalog-page
+            blockType: container
+        - '@setBlockTheme':
+              themes: 'ProductReviewBundle:layouts:default/product-review-catalog-page.html.twig'
+        - '@add':
+            parentId: product_view_primary_container
+            id: product-review
+            blockType: container
+            prepend: true

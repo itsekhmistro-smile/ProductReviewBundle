@@ -1,0 +1,15 @@
+{% extends 'OroDashboardBundle:Dashboard:widget.html.twig' %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+
+{% block content %}
+    {{ dataGrid.renderGrid('smile-product-reviews-grid') }}
+{% endblock %}
+
+{% block actions %}
+    {% set actions = [{
+        'type': 'link',
+        'label': 'All reviews',
+    }] %}
+
+    {{ parent() }}
+{% endblock %}

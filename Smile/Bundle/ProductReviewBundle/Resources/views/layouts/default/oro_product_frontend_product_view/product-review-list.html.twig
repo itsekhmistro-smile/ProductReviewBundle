@@ -1,0 +1,12 @@
+{% block _product_review_list_widget %}
+    {% if is_granted('frontend_review_view') %}
+        {% if productRating is defined and productRating is not null %}
+            {% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
+            {% include 'OroDataGridBundle:js:toolbar.html.twig' %}
+
+            {{ dataGrid.renderGrid('frontend-product-review-list', {'productId': productId}) }}
+        {% else %}
+            <p>{{ 'oro.translation.product_review_list_widget.empty'|trans }}</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

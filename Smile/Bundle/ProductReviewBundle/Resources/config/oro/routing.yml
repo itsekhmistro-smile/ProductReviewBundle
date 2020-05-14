@@ -1,0 +1,10 @@
+product_reviews:
+    resource: Smile\Bundle\ProductReviewBundle\Controller\ProductReviewController
+    type: annotation
+
+frontend_product_reviews:
+    resource: Smile\Bundle\ProductReviewBundle\Controller\Frontend\ProductReviewController
+    type: annotation
+    prefix: /product-reviews
+    options:
+        frontend: true

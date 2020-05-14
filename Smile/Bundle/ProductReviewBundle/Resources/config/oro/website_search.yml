@@ -1,0 +1,8 @@
+Oro\Bundle\ProductBundle\Entity\Product:
+    fields:
+        -
+            name: rating
+            type: decimal
+        -
+            name: countReviews
+            type: integer

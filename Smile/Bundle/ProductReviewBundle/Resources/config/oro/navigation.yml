@@ -1,0 +1,12 @@
+navigation:
+    menu_config:
+        items:
+            product_review_list:
+                label: Product reviews
+                route: product_reviews_index
+        tree:
+            application_menu:
+                children:
+                    products_tab:
+                        children:
+                            product_review_list: ~

@@ -1,0 +1,21 @@
+{% block _product_review_catalog_page_widget %}
+    {% if is_granted('frontend_review_view') %}
+        <div class="product-view__review">
+            {% if product is defined and product is not null %}
+                {% if product.rating is defined and product.rating is not empty %}
+                    <div
+                            data-page-component-module="productreview/js/app/components/rating-component"
+                            data-rate-value="{{ product.rating }}"
+                            class="star-review"
+                    >
+                        <p class="product-raiting__title">
+                            {% if product.countReviews is defined and product.countReviews %}
+                                ({{ product.countReviews }})
+                            {% endif %}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,5 @@
+app-modules:
+    - productreview/lib/rater/rater.min
+dynamic-imports:
+  productreview:
+    - productreview/js/app/components/rating-component

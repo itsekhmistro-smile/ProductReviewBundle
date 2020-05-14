@@ -1,0 +1,184 @@
+datagrids:
+    smile-product-reviews-grid:
+        views_list: '@oro_product_review.datagrid.product_review_list'
+        options:
+            mass_actions:
+                delete:
+                    enabled: false
+            entity_pagination: true
+            noDataMessages:
+                emptyGrid: oro.translation.datagrid.empty_grid_message
+                emptyFilteredGrid: oro.translation.datagrid.empty_filtered_grid_message
+        source:
+            type: orm
+            query:
+                select:
+                    - productReview
+                    - product.sku AS productSku
+                from:
+                    - { table: Smile\Bundle\ProductReviewBundle\Entity\ProductReview, alias: productReview }
+                join:
+                    inner:
+                        - { join: productReview.product, alias: product }
+                    left:
+                        - { join: productReview.customer_user, alias: user }
+
+        columns:
+            id:
+                label: ID
+                frontend_type: integer
+            productSku:
+                label: oro.translation.ui.product_sku
+            rating:
+                label: oro.translation.ui.rating
+                frontend_type: decimal
+            comment:
+                label: oro.translation.ui.comment
+            authorDisplayName:
+                label: oro.translation.ui.author
+            status:
+                label: oro.translation.ui.status
+                inline_editing:
+                    enable: true
+                frontend_type: select
+                choices: "@smile_product_review.provider.product_status_provider->getAvailableProductReviewStatuses"
+            createdAt:
+                label: oro.translation.ui.created_at
+                frontend_type: datetime
+            username:
+                renderable: false
+
+        sorters:
+            columns:
+                id:
+                    data_name: productReview.id
+                rating:
+                    data_name: productReview.rating
+                comment:
+                    data_name: productReview.comment
+                authorDisplayName:
+                    data_name: productReview.authorDisplayName
+                status:
+                    data_name: productReview.status
+                productSku:
+                    data_name: product.sku
+                createdAt:
+                    data_name: productReview.createdAt
+            default:
+                createdAt: DESC
+
+        filters:
+            columns:
+                id:
+                    type: number
+                    data_name: productReview.id
+                rating:
+                    type: number
+                    data_name: productReview.rating
+                authorDisplayName:
+                    type: string
+                    data_name: productReview.authorDisplayName
+                status:
+                    type: choice
+                    null_value: _empty_
+                    data_name: productReview.status
+                    options:
+                        field_options:
+                            multiple: true
+                            choices: "@smile_product_review.provider.product_status_provider->getAvailableProductReviewStatuses"
+                productSku:
+                    type: string
+                    data_name: product.sku
+                createdAt:
+                    type: datetime
+                    data_name: productReview.createdAt
+
+        inline_editing:
+            enable: true
+            behaviour: enable_selected
+            entity_name: 'Smile\Bundle\ProductReviewBundle\Entity\ProductReview'
+        action_configuration:
+            delete: false
+            update: false
+
+    frontend-product-review-list:
+        options:
+            toolbarOptions:
+                addRefreshAction: false
+                addResetAction: false
+                addDatagridSettingsManager: false
+                placement:
+                    top: true
+                    bottom: false
+            frontend: true
+        source:
+            type: orm
+            query:
+                select:
+                    - productReview
+                from:
+                    - { table: Smile\Bundle\ProductReviewBundle\Entity\ProductReview, alias: productReview }
+                where:
+                    and:
+                        - productReview.status = 'published'
+                        - productReview.product = :productId
+            bind_parameters:
+                - productId
+
+        columns:
+            rating:
+                type: twig
+                template: ProductReviewBundle:ProductReview/Datagrid:rating.html.twig
+                label: oro.translation.ui.rating
+                frontend_type: html
+            comment:
+                label: oro.translation.ui.comment
+                frontend_type: string
+            authorDisplayName:
+                label: oro.translation.ui.author
+                frontend_type: string
+            createdAt:
+                label: oro.translation.ui.created_at
+                frontend_type: datetime
+
+        sorters:
+            columns:
+                rating:
+                    data_name: productReview.rating
+                createdAt:
+                    data_name: productReview.createdAt
+            default:
+                createdAt: DESC
+
+    products-grid:
+        source:
+            query:
+                select:
+                    - product.rating
+
+        columns:
+            rating:
+                label: oro.translation.ui.rating
+                frontend_type: decimal
+
+        sorters:
+            columns:
+                rating:
+                    data_name: product.rating
+
+        filters:
+            columns:
+                rating:
+                    type: number
+                    data_name: product.rating
+
+    frontend-product-search-grid:
+        source:
+            query:
+                select:
+                    - text.rating as rating
+                    - text.countReviews as countReviews
+        sorters:
+            columns:
+                rating:
+                    data_name: text.rating
