@@ -1,0 +1,17 @@
+{
+    "name": "smile/product-review-bundle",
+    "description": "5-star Product Rating&Review for OroCommerce",
+    "require": {
+        "oro/commerce": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": {"": "src/"},
+        "exclude-from-classmap": ["/Tests/"]
+    },
+    "authors": [
+        {
+            "name": "Oleh Ivantsiv",
+            "email": "oleh.ivantsiv@smile-ukraine.com"
+        }
+    ]
+}

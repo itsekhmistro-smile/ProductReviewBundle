@@ -101,19 +101,22 @@ class ProductReviewType extends AbstractType
                     'required' => true
                 ]
             )
-            ->add('product',
+            ->add(
+                'product',
                 HiddenType::class,
                 [
                     'required' => true
                 ]
             )
-            ->add('customerUser',
+            ->add(
+                'customerUser',
                 HiddenType::class,
                 [
                     'required' => false
                 ]
             )
-            ->add('recaptchaResponse',
+            ->add(
+                'recaptchaResponse',
                 HiddenType::class,
                 [
                     'required' => false
