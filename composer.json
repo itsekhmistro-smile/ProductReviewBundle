@@ -2,7 +2,7 @@
     "name": "smile/product-review-bundle",
     "description": "5-star Product Rating&Review for OroCommerce",
     "require": {
-        "oro/commerce": "4.1.*"
+        "oro/commerce-enterprise": "4.1.*"
     },
     "autoload": {
         "psr-4": {"Smile\\Bundle\\ProductReviewBundle\\": ""},
