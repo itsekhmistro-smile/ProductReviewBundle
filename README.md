@@ -3,6 +3,6 @@
 ## Installation (temporary)
 
  - Install oro commerce EE 4.1.*
- - Run `composer require smile/product-review-bundle`
+ - Copy `Smile` folder to `src` folder in your project
  - run command `oro:platform:update`
  

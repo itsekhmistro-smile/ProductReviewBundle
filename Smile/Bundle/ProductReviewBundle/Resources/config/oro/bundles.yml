@@ -1,2 +1,0 @@
-bundles:
-  - { name: Smile\Bundle\ProductReviewBundle\ProductReviewBundle, priority: 1000 }
