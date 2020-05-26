@@ -2,10 +2,10 @@
 
 namespace Smile\Bundle\ProductReviewBundle\Form\Model;
 
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrue as RecaptchaTrue;
 use Oro\Bundle\CustomerBundle\Entity\CustomerUser;
 use Oro\Bundle\ProductBundle\Entity\Product;
 use Smile\Bundle\ProductReviewBundle\Entity\ProductReview;
-use Smile\Bundle\ProductReviewBundle\Validator\Constraints\IsGoogleRecaptchaValid;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -81,17 +81,11 @@ class ProductReviewFormModel
     /**
      * @var string|null
      *
-     * @Assert\NotBlank(
-     *     groups={
-     *          ProductReviewFormModel::POST_PRODUCT_REVIEW_WITH_RECAPTCHA_VALIDATION_GROUP
-     *     },
-     *     message="smile_product_review.validators.recaptcha.not_blank"
-     * )
-     * @IsGoogleRecaptchaValid(
+     * @RecaptchaTrue(
      *     groups={
      *          ProductReviewFormModel::POST_PRODUCT_REVIEW_WITH_RECAPTCHA_VALIDATION_GROUP
      *     }
      * )
      */
-    public $recaptchaResponse;
+    public $recaptcha;
 }

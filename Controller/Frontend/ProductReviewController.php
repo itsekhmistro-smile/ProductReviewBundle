@@ -45,7 +45,7 @@ class ProductReviewController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $this->get('translator')->trans('oro.translation.product_review_create_form.success_created_text')
+                $this->get('translator')->trans('smile.product_review.form.success_created_text')
             );
 
             return $this->redirectToRoute('oro_product_frontend_product_view', [

@@ -132,7 +132,7 @@ class ProductReviewBundle implements Migration, ExtendExtensionAwareInterface
                     'is_serialized' => false
                 ],
                 'entity' => [
-                    'label' => 'oro.translation.product_review_widget.label'
+                    'label' => 'smile.product_review.widget.label'
                 ],
                 'datagrid' => [
                     'is_visible' => true

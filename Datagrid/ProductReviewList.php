@@ -9,7 +9,6 @@ use Smile\Bundle\ProductReviewBundle\Entity\ProductReview;
 
 /**
  * Class ProductReviewList
- * @package Smile\Bundle\ProductReviewBundle\Datagrid
  */
 class ProductReviewList extends AbstractViewsList
 {
@@ -28,7 +27,7 @@ class ProductReviewList extends AbstractViewsList
             ]
         );
         $view
-            ->setLabel($this->translator->trans('oro.translation.datagrid.view.needs_review'))
+            ->setLabel($this->translator->trans('smile.product_review.datagrid.view.needs_review'))
             ->setDefault(true);
 
         return [$view];

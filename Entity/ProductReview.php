@@ -74,7 +74,7 @@ class ProductReview extends ExtendProductReview implements DatesAwareInterface
      * @ConfigField(
      *      defaultValues={
      *          "entity"={
-     *              "label"="oro.translation.ui.id"
+     *              "label"="smile.product_review.ui.id"
      *          }
      *      }
      * )
@@ -98,7 +98,7 @@ class ProductReview extends ExtendProductReview implements DatesAwareInterface
      * @ConfigField(
      *      defaultValues={
      *          "entity"={
-     *              "label"="oro.translation.ui.rating"
+     *              "label"="smile.product_review.ui.rating"
      *          }
      *      }
      * )
@@ -112,7 +112,7 @@ class ProductReview extends ExtendProductReview implements DatesAwareInterface
      * @ConfigField(
      *      defaultValues={
      *          "entity"={
-     *              "label"="oro.translation.ui.comment"
+     *              "label"="smile.product_review.ui.comment"
      *          }
      *      }
      * )
@@ -126,7 +126,7 @@ class ProductReview extends ExtendProductReview implements DatesAwareInterface
      * @ConfigField(
      *      defaultValues={
      *          "entity"={
-     *              "label"="oro.translation.ui.status"
+     *              "label"="smile.product_review.ui.status"
      *          }
      *      }
      * )
@@ -140,7 +140,7 @@ class ProductReview extends ExtendProductReview implements DatesAwareInterface
      * @ConfigField(
      *      defaultValues={
      *          "entity"={
-     *              "label"="oro.translation.ui.author"
+     *              "label"="smile.product_review.ui.author"
      *          }
      *      }
      * )

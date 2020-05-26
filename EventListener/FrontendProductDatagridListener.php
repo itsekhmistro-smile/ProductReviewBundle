@@ -82,7 +82,7 @@ class FrontendProductDatagridListener
             '[columns]',
             [
                 ProductReviewFieldNameProvider::RATING_FIELD_NAME => [
-                    'label' => 'oro.translation.ui.rating'
+                    'label' => 'smile.product_review.ui.rating'
                 ],
             ]
         );
@@ -96,7 +96,7 @@ class FrontendProductDatagridListener
             ProductReviewFieldNameProvider::COUNT_REVIEWS_FIELD_NAME,
             [
                 ProductReviewFieldNameProvider::COUNT_REVIEWS_FIELD_NAME => [
-                    'label' => 'oro.translation.ui.count_reviews'
+                    'label' => 'smile.product_review.ui.count_reviews'
                 ],
             ]
         );

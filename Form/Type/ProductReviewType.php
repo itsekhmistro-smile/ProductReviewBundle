@@ -7,8 +7,8 @@ use Oro\Bundle\CustomerBundle\Entity\CustomerUser;
 use Oro\Bundle\ProductBundle\Entity\Product;
 use Oro\Bundle\ProductBundle\Entity\Repository\ProductRepository;
 use Smile\Bundle\ProductReviewBundle\Form\DataTransformer\ProductToDefaultNameTransformer;
+use Smile\Bundle\ProductReviewBundle\Form\Extension\ProductReviewTypeExtension;
 use Smile\Bundle\ProductReviewBundle\Form\Model\ProductReviewFormModel;
-use Smile\Bundle\ProductReviewBundle\Manager\GoogleRecaptchaManager;
 use Smile\Bundle\ProductReviewBundle\Provider\ProductReviewRatingChoiceProvider;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -45,9 +45,9 @@ class ProductReviewType extends AbstractType
     protected $productReviewRatingChoiceProvider;
 
     /**
-     * @var GoogleRecaptchaManager
+     * @var ProductReviewTypeExtension
      */
-    protected $googleRecaptchaManager;
+    protected $productReviewTypeExtension;
 
     /**
      * ProductReviewType constructor.
@@ -55,18 +55,18 @@ class ProductReviewType extends AbstractType
      * @param EntityManagerInterface $entityManager
      * @param TokenStorageInterface $tokenStorage
      * @param ProductReviewRatingChoiceProvider $productReviewRatingChoiceProvider
-     * @param GoogleRecaptchaManager $googleRecaptchaManager
+     * @param ProductReviewTypeExtension $productReviewTypeExtension
      */
     public function __construct(
         EntityManagerInterface $entityManager,
         TokenStorageInterface $tokenStorage,
         ProductReviewRatingChoiceProvider $productReviewRatingChoiceProvider,
-        GoogleRecaptchaManager $googleRecaptchaManager
+        ProductReviewTypeExtension $productReviewTypeExtension
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
         $this->productReviewRatingChoiceProvider = $productReviewRatingChoiceProvider;
-        $this->googleRecaptchaManager = $googleRecaptchaManager;
+        $this->productReviewTypeExtension = $productReviewTypeExtension;
     }
 
     /**
@@ -79,7 +79,7 @@ class ProductReviewType extends AbstractType
                 'rating',
                 ChoiceType::class,
                 [
-                    'label' => 'oro.translation.product_review_create_form.rating_label',
+                    'label' => 'smile.product_review.form.rating_label',
                     'required' => false,
                     'choices' => $this->productReviewRatingChoiceProvider->getAvailableProductReviewRatingChoices(),
                     'expanded' => true
@@ -89,7 +89,7 @@ class ProductReviewType extends AbstractType
                 'comment',
                 TextareaType::class,
                 [
-                    'label' => 'oro.translation.product_review_create_form.comment_label',
+                    'label' => 'smile.product_review.form.comment_label',
                     'required' => false
                 ]
             )
@@ -97,26 +97,17 @@ class ProductReviewType extends AbstractType
                 'author',
                 TextType::class,
                 [
-                    'label' => 'oro.translation.product_review_create_form.author_label',
+                    'label' => 'smile.product_review.form.author_label',
                     'required' => true
                 ]
             )
-            ->add(
-                'product',
+            ->add('product',
                 HiddenType::class,
                 [
                     'required' => true
                 ]
             )
-            ->add(
-                'customerUser',
-                HiddenType::class,
-                [
-                    'required' => false
-                ]
-            )
-            ->add(
-                'recaptchaResponse',
+            ->add('customerUser',
                 HiddenType::class,
                 [
                     'required' => false
@@ -194,10 +185,18 @@ class ProductReviewType extends AbstractType
             $groups[] = ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_LOGGED;
         }
 
-        if ($this->googleRecaptchaManager->isGoogleRecaptchaSettingsValid()) {
+        if ($this->isProtected()) {
             $groups[] = ProductReviewFormModel::POST_PRODUCT_REVIEW_WITH_RECAPTCHA_VALIDATION_GROUP;
         }
 
         return $groups;
+    }
+
+    /**
+     * @return boolean
+     */
+    protected function isProtected(): bool
+    {
+        return $this->productReviewTypeExtension->isProtected();
     }
 }

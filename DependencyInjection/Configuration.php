@@ -2,6 +2,7 @@
 
 namespace Smile\Bundle\ProductReviewBundle\DependencyInjection;
 
+use Doctrine\DBAL\Types\Type;
 use Oro\Bundle\ConfigBundle\Config\ConfigManager;
 use Oro\Bundle\ConfigBundle\DependencyInjection\SettingsBuilder;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -14,13 +15,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    public const
-        PARAM_NAME_ENABLED_GOOGLE_RECAPTCHA = 'enable_google_recaptcha',
-        PARAM_NAME_GOOGLE_RECAPTCHA_SITE_KEY = 'google_recaptcha_site_key',
-        PARAM_NAME_GOOGLE_RECAPTCHA_SECRET_KEY = 'google_recaptcha_secret_key'
-    ;
+    public const PROTECT_PRODUCT_REVIEW_FORM = 'protect_product_review_form';
 
-    /** {@inheritdoc} */
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder(ProductReviewExtension::ALIAS);
@@ -28,18 +27,10 @@ class Configuration implements ConfigurationInterface
         SettingsBuilder::append(
             $treeBuilder->getRootNode(),
             [
-                self::PARAM_NAME_ENABLED_GOOGLE_RECAPTCHA  => [
-                    'type'  => 'boolean',
+                self::PROTECT_PRODUCT_REVIEW_FORM => [
+                    'type'  => Type::BOOLEAN,
                     'value' => false
                 ],
-                self::PARAM_NAME_GOOGLE_RECAPTCHA_SITE_KEY  => [
-                    'type'  => 'string',
-                    'value' => ''
-                ],
-                self::PARAM_NAME_GOOGLE_RECAPTCHA_SECRET_KEY  => [
-                    'type'  => 'string',
-                    'value' => ''
-                ]
             ]
         );
 

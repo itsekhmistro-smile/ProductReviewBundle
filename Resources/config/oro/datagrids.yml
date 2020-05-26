@@ -1,14 +1,14 @@
 datagrids:
     smile-product-reviews-grid:
-        views_list: '@oro_product_review.datagrid.product_review_list'
+        views_list: '@smile_product_review.datagrid.product_review_list'
         options:
             mass_actions:
                 delete:
                     enabled: false
             entity_pagination: true
             noDataMessages:
-                emptyGrid: oro.translation.datagrid.empty_grid_message
-                emptyFilteredGrid: oro.translation.datagrid.empty_filtered_grid_message
+                emptyGrid: smile.product_review.datagrid.empty_grid_message
+                emptyFilteredGrid: smile.product_review.datagrid.empty_filtered_grid_message
         source:
             type: orm
             query:
@@ -28,22 +28,22 @@ datagrids:
                 label: ID
                 frontend_type: integer
             productSku:
-                label: oro.translation.ui.product_sku
+                label: smile.product_review.ui.product_sku
             rating:
-                label: oro.translation.ui.rating
+                label: smile.product_review.ui.rating
                 frontend_type: decimal
             comment:
-                label: oro.translation.ui.comment
+                label: smile.product_review.ui.comment
             authorDisplayName:
-                label: oro.translation.ui.author
+                label: smile.product_review.ui.author
             status:
-                label: oro.translation.ui.status
+                label: smile.product_review.ui.status
                 inline_editing:
                     enable: true
                 frontend_type: select
                 choices: "@smile_product_review.provider.product_status_provider->getAvailableProductReviewStatuses"
             createdAt:
-                label: oro.translation.ui.created_at
+                label: smile.product_review.ui.created_at
                 frontend_type: datetime
             username:
                 renderable: false
@@ -129,16 +129,16 @@ datagrids:
             rating:
                 type: twig
                 template: ProductReviewBundle:ProductReview/Datagrid:rating.html.twig
-                label: oro.translation.ui.rating
+                label: smile.product_review.ui.rating
                 frontend_type: html
             comment:
-                label: oro.translation.ui.comment
+                label: smile.product_review.ui.comment
                 frontend_type: string
             authorDisplayName:
-                label: oro.translation.ui.author
+                label: smile.product_review.ui.author
                 frontend_type: string
             createdAt:
-                label: oro.translation.ui.created_at
+                label: smile.product_review.ui.created_at
                 frontend_type: datetime
 
         sorters:
@@ -158,7 +158,7 @@ datagrids:
 
         columns:
             rating:
-                label: oro.translation.ui.rating
+                label: smile.product_review.ui.rating
                 frontend_type: decimal
 
         sorters:

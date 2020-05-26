@@ -1,5 +1,10 @@
 layout:
     actions:
+        - '@appendOption':
+            id: page_main
+            optionName: attr.class
+            optionValue: page-main--single-product
+
         #Product rating
         - '@add':
             parentId: product_view_primary_container
@@ -21,8 +26,7 @@ layout:
             options:
                 vars:
                     form: '=data["product_review_form"].getProductReviewFormView(data["product"])'
-                    isGoogleRecaptchaSettingsValid: '=data["product_review_form"].isGoogleRecaptchaSettingsValid()'
-                    googleRecaptchaSiteKey: '=data["product_review_form"].getGoogleRecaptchaSiteKey()'
+                    isProtected: '=data["product_review_form"].isProtected()'
         - '@setBlockTheme':
             themes: product-review-form.html.twig
 
@@ -36,22 +40,7 @@ layout:
                     productId: '=data["smile_product"].getProductId(data["product"])'
                     productRating: '=data["smile_product"].getRating(data["product"])'
         - '@setBlockTheme':
-           themes: product-review-list.html.twig
+            themes: product-review-list.html.twig
         - '@move':
             id:  product-review-list
             siblingId: product_view_additional_container
-
-        #Google recaptcha script
-        -   '@add':
-                parentId: scripts_before
-                id: google-recaptcha-script
-                blockType: container
-                options:
-                    vars:
-                        isGoogleRecaptchaSettingsValid: '=data["product_review_form"].isGoogleRecaptchaSettingsValid()'
-        -   '@setBlockTheme':
-                themes: google-recaptcha-script.html.twig
-        - '@appendOption':
-            id: page_main
-            optionName: attr.class
-            optionValue: page-main--single-product

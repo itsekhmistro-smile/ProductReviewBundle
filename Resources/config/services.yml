@@ -4,7 +4,7 @@ services:
         autoconfigure: true
 
     #Layout providers
-    smile_product.layout.data_provider.smile_product:
+    smile_product_review.layout.data_provider.product_data:
         class: Smile\Bundle\ProductReviewBundle\Layout\DataProvider\ProductDataProvider
         arguments:
             - '@doctrine.orm.entity_manager'
@@ -12,12 +12,12 @@ services:
         tags:
             - { name: layout.data_provider, alias: smile_product }
 
-    smile_product.layout.data_provider.product_review_form:
+    smile_product_review.layout.data_provider.product_review_form:
         class: Smile\Bundle\ProductReviewBundle\Layout\DataProvider\ProductReviewFormProvider
         arguments:
             - '@form.factory'
             - '@router.default'
-            - '@smile_product_review.manager.google_recaptcha'
+            - '@smile_product_review.form.extension.product_review_type_extension'
         tags:
             - { name: layout.data_provider, alias: product_review_form }
 
@@ -26,12 +26,6 @@ services:
         class: Smile\Bundle\ProductReviewBundle\Manager\ProductReviewManager
         arguments:
             - '@doctrine.orm.entity_manager'
-
-    smile_product_review.manager.google_recaptcha:
-        class: Smile\Bundle\ProductReviewBundle\Manager\GoogleRecaptchaManager
-        arguments:
-            - '@hwi_oauth.http_client'
-            - '@oro_config.manager'
 
     #Subscribers
     smile_product_review.subscriber.set_product_rating:
@@ -50,7 +44,7 @@ services:
             - { name: doctrine.event_subscriber }
 
     #Listeners
-    smile.product.event_listener.frontend.datagrid.product:
+    smile_product_review.event_listener.frontend.datagrid.product:
         class: Smile\Bundle\ProductReviewBundle\EventListener\FrontendProductDatagridListener
         arguments:
             - '@oro_entity.doctrine_helper'
@@ -69,13 +63,13 @@ services:
             - { name: kernel.event_listener, event: oro_website_search.event.index_entity.product, method: onWebsiteSearchIndex }
 
     #FormTypes
-    smile_product_review_form:
+    smile_product_review.form.type.product_review_type:
         class: Smile\Bundle\ProductReviewBundle\Form\Type\ProductReviewType
         arguments:
             - '@doctrine.orm.entity_manager'
             - '@security.token_storage'
             - '@smile_product_review.provider.product_rating_choice_provider'
-            - '@smile_product_review.manager.google_recaptcha'
+            - '@smile_product_review.form.extension.product_review_type_extension'
         tags:
             - { name: form.type }
 
@@ -87,18 +81,20 @@ services:
     smile_product_review.provider.product_rating_choice_provider:
         class: Smile\Bundle\ProductReviewBundle\Provider\ProductReviewRatingChoiceProvider
 
-    #For Datagrid
-    oro_product_review.datagrid.product_review_list:
+    #For datagrid
+    smile_product_review.datagrid.product_review_list:
         class: Smile\Bundle\ProductReviewBundle\Datagrid\ProductReviewList
         public: true
-
-    #Validators
-    smile_product_review.is_google_recaptcha_valid_validator:
-        class: Smile\Bundle\ProductReviewBundle\Validator\Constraints\IsGoogleRecaptchaValidValidator
-        arguments:
-            - '@smile_product_review.manager.google_recaptcha'
 
     #Factory
     smile_product_review.factory.product_review:
         class: Smile\Bundle\ProductReviewBundle\Entity\Factory\ProductReviewFactory
         public: true
+
+    #Form type extension
+    smile_product_review.form.extension.product_review_type_extension:
+        class: Smile\Bundle\ProductReviewBundle\Form\Extension\ProductReviewTypeExtension
+        calls:
+            - [setConfigManager, ['@oro_config.user']]
+        tags:
+            - { name: form.type_extension, extended_type: Smile\Bundle\ProductReviewBundle\Form\Type\ProductReviewType }

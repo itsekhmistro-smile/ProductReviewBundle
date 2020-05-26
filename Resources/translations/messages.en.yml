@@ -1,37 +1,25 @@
-oro:
-    translation:
-        product_review_widget:
-            label: Product rating
-            empty: This product don't have rating yet.
-            count_review_label: count reviews
+smile:
+    product_review:
+        datagrid:
+            empty_grid_message: There are no reviews
+            empty_filtered_grid_message: No reviews were found to match your search. Try modifying your search criteria...
+            view:
+                needs_review: Needs Review
 
-        product_review_create_form:
-            form_title: Write feedback
+        entity_plural_label: Product Reviews
+
+        form:
+            title: Write feedback
             rating_label: Your rating
             comment_label: Your comment
             author_label: Your name
             submit_button_text: Create new review
             success_created_text: Successfully created new review
-            status_label: Status
 
-        product_review_update_form:
-            success_update_text: Successfully update
-
-        product_review_list_widget:
-            empty: This product don't have reviews yet.
-
-        product_review:
-            entity_label: Product Review
-            entity_plural_label: Product Reviews
-            settings_label: Product review settings
-
-        datagrid:
-            rating:
-                label: Rating
-            empty_grid_message: There are no reviews
-            empty_filtered_grid_message: No reviews were found to match your search. Try modifying your search criteria...
-            view:
-                needs_review: Needs Review
+        system_configuration:
+            fields:
+                enable_google_recaptcha:
+                    label: Protect Product Review Form
 
         ui:
             id: Id
@@ -45,22 +33,7 @@ oro:
             created_at: Created at
             count_reviews: countReviews
 
-    product_review:
-        system_configuration:
-            fields:
-                enable_google_recaptcha:
-                    label: Enable google recaptcha
-                    # TODO: create tooltip text
-                    tooltip: Enable google recaptcha tooltip
-                google_recaptcha_site_key:
-                    label: Google recaptcha site key
-                    # TODO: create tooltip text
-                    tooltip: Google recaptcha site key tooltip
-                google_recaptcha_secret_key:
-                    label: Google recaptcha secret key
-                    # TODO: create tooltip text
-                    tooltip: Google recaptcha secret key tooltip
-
-smile:
-    productreview:
-        entity_label: Product Review
+        widget:
+            label: Product rating
+            empty: This product doesn't have rating yet.
+            count_review_label: count reviews

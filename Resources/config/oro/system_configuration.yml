@@ -1,47 +1,21 @@
 system_configuration:
-    groups:
-        product_review:
-            title: oro.translation.product_review.entity_label
-            icon: 'fa-cogs'
-        product_review_settings:
-            title: oro.translation.product_review.settings_label
+    fields:
+        product_review.protect_product_review_form:
+            data_type: boolean
+            type: Oro\Bundle\ConfigBundle\Form\Type\ConfigCheckbox
+            options:
+                label: 'smile.product_review.system_configuration.fields.enable_google_recaptcha.label'
+                required: false
+                resettable: false
 
     tree:
         system_configuration:
-            commerce:
+            platform:
                 children:
-                    product:
+                    integrations:
                         children:
-                            product_review:
-                                priority: -10
+                            hack_oro_recaptcha:
                                 children:
-                                    product_review_settings:
+                                    protected_features:
                                         children:
-                                            - product_review.enable_google_recaptcha
-                                            - product_review.google_recaptcha_site_key
-                                            - product_review.google_recaptcha_secret_key
-
-    fields:
-        product_review.enable_google_recaptcha:
-            data_type: boolean
-            type: Oro\Bundle\ConfigBundle\Form\Type\ConfigCheckbox
-            priority: 30
-            options:
-                label: oro.product_review.system_configuration.fields.enable_google_recaptcha.label
-                tooltip: oro.product_review.system_configuration.fields.fields.enable_google_recaptcha.tooltip
-
-        product_review.google_recaptcha_site_key:
-            data_type: string
-            type: Symfony\Component\Form\Extension\Core\Type\TextType
-            priority: 20
-            options:
-                label: oro.product_review.system_configuration.fields.google_recaptcha_site_key.label
-                tooltip: oro.product_review.system_configuration.fields.fields.google_recaptcha_site_key.tooltip
-
-        product_review.google_recaptcha_secret_key:
-            data_type: string
-            type: Symfony\Component\Form\Extension\Core\Type\TextType
-            priority: 10
-            options:
-                label: oro.product_review.system_configuration.fields.google_recaptcha_secret_key.label
-                tooltip: oro.product_review.system_configuration.fields.fields.google_recaptcha_secret_key.tooltip
+                                            - product_review.protect_product_review_form

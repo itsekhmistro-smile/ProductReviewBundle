@@ -18,14 +18,22 @@ class LoadProductReviewPermissions extends AbstractMassUpdateCustomerUserRolePer
     {
         return [
             'ROLE_FRONTEND_ADMINISTRATOR' => [
-                'entity:' . ProductReview::class => ['VIEW_NONE', 'CREATE_NONE', 'EDIT_NONE', 'DELETE_NONE'],
+                'entity:' . ProductReview::class => $this->getProductReviewPermissions(),
             ],
             'ROLE_FRONTEND_BUYER' => [
-                'entity:' . ProductReview::class => ['VIEW_SYSTEM', 'CREATE_SYSTEM', 'EDIT_NONE', 'DELETE_NONE'],
+                'entity:' . ProductReview::class => $this->getProductReviewPermissions(),
             ],
             'ROLE_FRONTEND_ANONYMOUS' => [
-                'entity:' . ProductReview::class => ['VIEW_SYSTEM', 'CREATE_SYSTEM', 'EDIT_NONE', 'DELETE_NONE']
+                'entity:' . ProductReview::class => $this->getProductReviewPermissions()
             ]
         ];
+    }
+
+    /**
+     * @return array
+     */
+    protected function getProductReviewPermissions(): array
+    {
+        return ['VIEW_SYSTEM', 'CREATE_SYSTEM', 'EDIT_NONE', 'DELETE_NONE'];
     }
 }

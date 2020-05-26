@@ -4,8 +4,8 @@ namespace Smile\Bundle\ProductReviewBundle\Layout\DataProvider;
 
 use Oro\Bundle\LayoutBundle\Layout\DataProvider\AbstractFormProvider;
 use Oro\Bundle\ProductBundle\Entity\Product;
+use Smile\Bundle\ProductReviewBundle\Form\Extension\ProductReviewTypeExtension;
 use Smile\Bundle\ProductReviewBundle\Form\Type\ProductReviewType;
-use Smile\Bundle\ProductReviewBundle\Manager\GoogleRecaptchaManager;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -16,24 +16,25 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class ProductReviewFormProvider extends AbstractFormProvider
 {
     /**
-     * @var GoogleRecaptchaManager
+     * @var ProductReviewTypeExtension
      */
-    protected $googleRecaptchaManager;
+    protected $productReviewTypeExtension;
 
     /**
      * ProductReviewFormProvider constructor.
      *
      * @param FormFactoryInterface $formFactory
      * @param UrlGeneratorInterface $router
-     * @param GoogleRecaptchaManager $googleRecaptchaManager
+     * @param ProductReviewTypeExtension $productReviewTypeExtension
      */
     public function __construct(
         FormFactoryInterface $formFactory,
         UrlGeneratorInterface $router,
-        GoogleRecaptchaManager $googleRecaptchaManager
+        ProductReviewTypeExtension $productReviewTypeExtension
     ) {
         parent::__construct($formFactory, $router);
-        $this->googleRecaptchaManager = $googleRecaptchaManager;
+
+        $this->productReviewTypeExtension = $productReviewTypeExtension;
     }
 
     /**
@@ -63,19 +64,11 @@ class ProductReviewFormProvider extends AbstractFormProvider
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
-    public function isGoogleRecaptchaSettingsValid(): bool
+    public function isProtected(): bool
     {
-        return $this->googleRecaptchaManager->isGoogleRecaptchaSettingsValid();
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getGoogleRecaptchaSiteKey(): ?string
-    {
-        return $this->googleRecaptchaManager->getGoogleRecaptchaSiteKey();
+        return $this->productReviewTypeExtension->isProtected();
     }
 
     /**
