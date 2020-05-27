@@ -15,14 +15,14 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    public const PROTECT_PRODUCT_REVIEW_FORM = 'protect_product_review_form';
+    public const PROTECT_PRODUCT_REVIEW_FORM = 'protect_review_form';
 
     /**
      * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder(ProductReviewExtension::ALIAS);
+        $treeBuilder = new TreeBuilder(SmileProductReviewExtension::ALIAS);
 
         SettingsBuilder::append(
             $treeBuilder->getRootNode(),
@@ -45,6 +45,6 @@ class Configuration implements ConfigurationInterface
      */
     public static function getConfigKeyByName($name)
     {
-        return ProductReviewExtension::ALIAS . ConfigManager::SECTION_MODEL_SEPARATOR . $name;
+        return SmileProductReviewExtension::ALIAS . ConfigManager::SECTION_MODEL_SEPARATOR . $name;
     }
 }

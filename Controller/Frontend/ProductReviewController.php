@@ -20,7 +20,7 @@ class ProductReviewController extends AbstractController
      * @Acl(
      *      id="product_review_create",
      *      type="entity",
-     *      class="ProductReviewBundle:ProductReview",
+     *      class="SmileProductReviewBundle:ProductReview",
      *      group_name="commerce",
      *      permission="CREATE"
      * )

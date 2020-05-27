@@ -128,7 +128,7 @@ datagrids:
         columns:
             rating:
                 type: twig
-                template: ProductReviewBundle:ProductReview/Datagrid:rating.html.twig
+                template: SmileProductReviewBundle:ProductReview/Datagrid:rating.html.twig
                 label: smile.product_review.ui.rating
                 frontend_type: html
             comment:

@@ -1,6 +1,6 @@
 system_configuration:
     fields:
-        product_review.protect_product_review_form:
+        smile_product_review.protect_review_form:
             data_type: boolean
             type: Oro\Bundle\ConfigBundle\Form\Type\ConfigCheckbox
             options:
@@ -18,4 +18,4 @@ system_configuration:
                                 children:
                                     protected_features:
                                         children:
-                                            - product_review.protect_product_review_form
+                                            - smile_product_review.protect_review_form

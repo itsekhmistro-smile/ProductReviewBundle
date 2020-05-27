@@ -5,7 +5,7 @@ layout:
             id: product-review-catalog-page
             blockType: container
         - '@setBlockTheme':
-              themes: 'ProductReviewBundle:layouts:default/product-review-catalog-page.html.twig'
+              themes: 'SmileProductReviewBundle:layouts:default/product-review-catalog-page.html.twig'
         - '@add':
             parentId: product_view_primary_container
             id: product-review
