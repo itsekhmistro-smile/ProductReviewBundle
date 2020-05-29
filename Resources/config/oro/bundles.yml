@@ -1,2 +1,2 @@
 bundles:
-  - { name: Smile\Bundle\ProductReviewBundle\SmileProductReviewBundle, priority: 2 }
+  - { name: Smile\Bundle\ProductReviewBundle\SmileProductReviewBundle, priority: 50 }
