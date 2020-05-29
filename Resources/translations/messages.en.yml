@@ -38,3 +38,6 @@ smile:
             label: Product rating
             empty: This product doesn't have rating yet.
             count_review_label: count reviews
+
+    productreview:
+        entity_label: Product Review

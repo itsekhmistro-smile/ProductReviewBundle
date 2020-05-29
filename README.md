@@ -13,6 +13,7 @@ composer require smile/product-review-bundle
 ```
 - Purge Oro cache:
 ```
+rm -rf ./var/cache/*
 php bin/console cache:clear --env=prod
 ```
 - Update oro platform: 
