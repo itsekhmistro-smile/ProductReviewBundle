@@ -4,7 +4,7 @@ This bundle adds reviews to products.
 
 ## Requirements
 
-- oro/commerce-enterprise v4.1.*
+- oro/commerce-enterprise 4.1.* || 4.2.* 
 
 ## Installation and Usage
 - Install via Composer:
