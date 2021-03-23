@@ -2,7 +2,7 @@
     "name": "smile/product-review-bundle",
     "description": "5-star Product Rating&Review for OroCommerce",
     "require": {
-        "oro/commerce-enterprise": "4.1.*",
+        "oro/commerce-enterprise": "4.1.* || 4.2.*",
         "friendsoforo/oro-recaptcha-bundle": "^4.1"
     },
     "autoload": {
