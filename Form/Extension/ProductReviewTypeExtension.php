@@ -14,7 +14,7 @@ class ProductReviewTypeExtension extends AbstractRecaptchaTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function getExtendedTypes()
+    public function getExtendedTypes(): iterable
     {
         return [ProductReviewType::class];
     }

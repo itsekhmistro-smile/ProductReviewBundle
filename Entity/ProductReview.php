@@ -5,8 +5,8 @@ namespace Smile\Bundle\ProductReviewBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareInterface;
 use Oro\Bundle\EntityBundle\EntityProperty\DatesAwareTrait;
-use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
+use Oro\Bundle\EntityConfigBundle\Metadata\Attribute\Config;
+use Oro\Bundle\EntityConfigBundle\Metadata\Attribute\ConfigField;
 use Oro\Bundle\OrganizationBundle\Entity\BusinessUnit;
 use Oro\Bundle\OrganizationBundle\Entity\Organization;
 use Oro\Bundle\OrganizationBundle\Entity\OrganizationInterface;
@@ -15,42 +15,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProductReview entity class
- *
- * @ORM\Entity(repositoryClass="Smile\Bundle\ProductReviewBundle\Entity\Repository\ProductReviewRepository")
- * @ORM\Table(
- *     name="smile_product_review",
- *     indexes={
- *          @ORM\Index(name="product_id", columns={"product_id"})
- *     }
- * )
- * @Config(
- *     routeName="product_reviews_index",
- *     routeCreate="product_review_create",
- *     routeUpdate="product_reviews_update",
- *     defaultValues={
- *          "dataaudit"={
- *              "auditable"=false
- *          },
- *          "attribute"={
- *              "has_attributes"=true
- *          },
- *          "ownership"={
- *              "owner_type"="BUSINESS_UNIT",
- *              "owner_field_name"="owner",
- *              "owner_column_name"="business_unit_owner_id",
- *              "organization_field_name"="organization",
- *              "organization_column_name"="organization_id"
- *          },
- *          "security"={
- *              "type"="ACL",
- *              "group_name"="commerce"
- *         }
- *      }
- * )
- * @ORM\HasLifecycleCallbacks()
  */
-class ProductReview extends ExtendProductReview implements DatesAwareInterface
+#[ORM\Entity(repositoryClass: \Smile\Bundle\ProductReviewBundle\Entity\Repository\ProductReviewRepository::class)]
+#[Config(routeName: 'product_reviews_index', routeCreate: 'product_review_create', routeUpdate: 'product_reviews_update', defaultValues: ['dataaudit' => ['auditable' => false], 'attribute' => ['has_attributes' => true], 'ownership' => ['owner_type' => 'BUSINESS_UNIT', 'owner_field_name' => 'owner', 'owner_column_name' => 'business_unit_owner_id', 'organization_field_name' => 'organization', 'organization_column_name' => 'organization_id'], 'security' => ['type' => 'ACL', 'group_name' => 'commerce']])]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Table(name: 'smile_product_review')]
+#[ORM\Index(name: 'product_id', columns: ['product_id'])]
+class ProductReview implements DatesAwareInterface, \Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityInterface
 {
+    use \Oro\Bundle\EntityExtendBundle\Entity\ExtendEntityTrait;
     use DatesAwareTrait;
 
     public const
@@ -68,119 +41,59 @@ class ProductReview extends ExtendProductReview implements DatesAwareInterface
     ;
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="smile.product_review.ui.id"
-     *          }
-     *      }
-     * )
      *
      * @var int
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\Column(type: 'integer')]
+    #[ConfigField(defaultValues: ['entity' => ['label' => 'smile.product_review.ui.id']])]
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="decimal", precision=3, scale=2)
-     * @Assert\NotBlank(groups={ProductReview::VALIDATION_GROUP})
-     * @Assert\Range(
-     *     min=ProductReview::MIN_RATING,
-     *     max=ProductReview::MAX_RATING,
-     *     minMessage="Min rating is {{ limit }}",
-     *     maxMessage="Max rating is {{ limit }}",
-     *     groups={ProductReview::VALIDATION_GROUP}
-     * )
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="smile.product_review.ui.rating"
-     *          }
-     *      }
-     * )
      */
+    #[Assert\NotBlank(groups: [ProductReview::VALIDATION_GROUP])]
+    #[Assert\Range(min: ProductReview::MIN_RATING, max: ProductReview::MAX_RATING, minMessage: 'Min rating is {{ limit }}', maxMessage: 'Max rating is {{ limit }}', groups: [ProductReview::VALIDATION_GROUP])]
+    #[ORM\Column(type: 'decimal', precision: 3, scale: 2)]
+    #[ConfigField(defaultValues: ['entity' => ['label' => 'smile.product_review.ui.rating']])]
     protected $rating;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="smile.product_review.ui.comment"
-     *          }
-     *      }
-     * )
      */
+    #[ORM\Column(type: 'text', nullable: true)]
+    #[ConfigField(defaultValues: ['entity' => ['label' => 'smile.product_review.ui.comment']])]
     protected $comment;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=30)
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="smile.product_review.ui.status"
-     *          }
-     *      }
-     * )
      */
+    #[ORM\Column(type: 'string', length: 30)]
+    #[ConfigField(defaultValues: ['entity' => ['label' => 'smile.product_review.ui.status']])]
     protected $status = self::STATUS_NEEDS_REVIEW;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @ConfigField(
-     *      defaultValues={
-     *          "entity"={
-     *              "label"="smile.product_review.ui.author"
-     *          }
-     *      }
-     * )
      */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ConfigField(defaultValues: ['entity' => ['label' => 'smile.product_review.ui.author']])]
     protected $author;
 
     /**
      * @var BusinessUnit
-     *
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\BusinessUnit")
-     * @ORM\JoinColumn(name="business_unit_owner_id", referencedColumnName="id", onDelete="SET NULL")
-     * @ConfigField(
-     *      defaultValues={
-     *          "dataaudit"={
-     *              "auditable"=true
-     *          },
-     *          "importexport"={
-     *              "excluded"=true
-     *          }
-     *      }
-     * )
      */
+    #[ORM\ManyToOne(targetEntity: \Oro\Bundle\OrganizationBundle\Entity\BusinessUnit::class)]
+    #[ORM\JoinColumn(name: 'business_unit_owner_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
+    #[ConfigField(defaultValues: ['dataaudit' => ['auditable' => true], 'importexport' => ['excluded' => true]])]
     protected $owner;
 
     /**
      * @var Organization
-     *
-     * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
-     * @ORM\JoinColumn(name="organization_id", referencedColumnName="id", onDelete="SET NULL")
-     * @ConfigField(
-     *      defaultValues={
-     *          "dataaudit"={
-     *              "auditable"=true
-     *          },
-     *          "importexport"={
-     *              "excluded"=true
-     *          }
-     *      }
-     * )
      */
+    #[ORM\ManyToOne(targetEntity: \Oro\Bundle\OrganizationBundle\Entity\Organization::class)]
+    #[ORM\JoinColumn(name: 'organization_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
+    #[ConfigField(defaultValues: ['dataaudit' => ['auditable' => true], 'importexport' => ['excluded' => true]])]
     protected $organization;
 
     /**
@@ -339,10 +252,10 @@ class ProductReview extends ExtendProductReview implements DatesAwareInterface
     /**
      * Pre persist event handler
      *
-     * @ORM\PrePersist
      *
      * @throws \Exception
      */
+    #[ORM\PrePersist]
     public function prePersist()
     {
         $this->createdAt = new \DateTime('now', new \DateTimeZone('UTC'));
@@ -352,10 +265,10 @@ class ProductReview extends ExtendProductReview implements DatesAwareInterface
     /**
      * Pre update event handler
      *
-     * @ORM\PreUpdate
      *
      * @throws \Exception
      */
+    #[ORM\PreUpdate]
     public function preUpdate()
     {
         $this->updatedAt = new \DateTime('now', new \DateTimeZone('UTC'));

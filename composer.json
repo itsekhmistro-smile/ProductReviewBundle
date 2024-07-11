@@ -2,8 +2,8 @@
     "name": "smile/product-review-bundle",
     "description": "5-star Product Rating&Review for OroCommerce",
     "require": {
-        "oro/commerce-enterprise": "4.1.* || 4.2.*",
-        "friendsoforo/oro-recaptcha-bundle": "4.1.* || 4.2.*"
+        "oro/commerce-enterprise": "6.0.*",
+        "friendsoforo/oro-recaptcha-bundle": "v6.0.x-dev"
     },
     "autoload": {
         "psr-4": {"Smile\\Bundle\\ProductReviewBundle\\": ""},
@@ -14,5 +14,12 @@
             "name": "Oleh Ivantsiv",
             "email": "oleh.ivantsiv@smile-ukraine.com"
         }
-    ]
+    ],
+    "repositories": {
+        "oro-recaptcha-bundle": {
+            "type": "vcs",
+            "url": "https://github.com/OleksandrProtsiuk/OroRecaptchaBundle.git",
+            "no-api": true
+        }
+    }
 }

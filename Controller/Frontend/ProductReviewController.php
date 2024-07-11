@@ -5,30 +5,26 @@ namespace Smile\Bundle\ProductReviewBundle\Controller\Frontend;
 use Smile\Bundle\ProductReviewBundle\Entity\ProductReview;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Smile\Bundle\ProductReviewBundle\Form\Type\ProductReviewType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Oro\Bundle\SecurityBundle\Annotation\Acl;
+use Oro\Bundle\SecurityBundle\Attribute\Acl;
 
 /**
  * Class ProductReviewController
  */
 class ProductReviewController extends AbstractController
 {
+    public function __construct(private \Doctrine\Persistence\ManagerRegistry $managerRegistry)
+    {
+    }
     /**
-     * @Route("/create", name="product_review_create")
-     * @Acl(
-     *      id="product_review_create",
-     *      type="entity",
-     *      class="SmileProductReviewBundle:ProductReview",
-     *      group_name="commerce",
-     *      permission="CREATE"
-     * )
      *
      * @param Request $request
-     *
      * @return Response
      */
+    #[\Symfony\Component\Routing\Attribute\Route(path: '/create', name: 'product_review_create')]
+    #[Acl(id: 'product_review_create', type: 'entity', class: 'SmileProductReviewBundle:ProductReview', group_name: 'commerce', permission: 'CREATE')]
     public function createAction(Request $request)
     {
         $form = $this->createForm(ProductReviewType::class);
@@ -39,7 +35,7 @@ class ProductReviewController extends AbstractController
             $productReviewFactory = $this->get('smile_product_review.factory.product_review');
             $productReview = $productReviewFactory->createProductReview($productReviewFormModel);
 
-            $em = $this->getDoctrine()->getManagerForClass(ProductReview::class);
+            $em = $this->managerRegistry->getManagerForClass(ProductReview::class);
             $em->persist($productReview);
             $em->flush();
 

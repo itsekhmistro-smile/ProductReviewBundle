@@ -21,26 +21,9 @@ class ProductReviewFormModel
 
     /**
      * @var string
-     *
-     * @Assert\NotBlank(
-     *     groups={
-     *          ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_ANONYMOUS,
-     *          ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_LOGGED
-     *     },
-     *     message="smile_product_review.validators.rating.not_blank"
-     * )
-     * @Assert\Range(
-     *     min=ProductReview::MIN_RATING,
-     *     max=ProductReview::MAX_RATING,
-     *     minMessage="Min rating is {{ limit }}",
-     *     maxMessage="Max rating is {{ limit }}",
-     *     groups={
-     *          ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_ANONYMOUS,
-     *          ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_LOGGED
-     *     },
-     *     notInRangeMessage="smile_product_review.validators.rating.not_in_range"
-     * )
      */
+    #[Assert\NotBlank(groups: [ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_ANONYMOUS, ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_LOGGED], message: 'smile_product_review.validators.rating.not_blank')]
+    #[Assert\Range(min: ProductReview::MIN_RATING, max: ProductReview::MAX_RATING, minMessage: 'Min rating is {{ limit }}', maxMessage: 'Max rating is {{ limit }}', groups: [ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_ANONYMOUS, ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_LOGGED], notInRangeMessage: 'smile_product_review.validators.rating.not_in_range')]
     public $rating;
 
     /**
@@ -50,27 +33,14 @@ class ProductReviewFormModel
 
     /**
      * @var string|null
-     *
-     * @Assert\NotBlank(
-     *     groups={
-     *          ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_ANONYMOUS
-     *     },
-     *     message="smile_product_review.validators.author.not_blank"
-     * )
      */
+    #[Assert\NotBlank(groups: [ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_ANONYMOUS], message: 'smile_product_review.validators.author.not_blank')]
     public $author;
 
     /**
      * @var Product
-     *
-     * @Assert\NotBlank(
-     *     groups={
-     *          ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_ANONYMOUS,
-     *          ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_LOGGED
-     *     },
-     *     message="smile_product_review.validators.product.not_blank"
-     * )
      */
+    #[Assert\NotBlank(groups: [ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_ANONYMOUS, ProductReviewFormModel::POST_PRODUCT_REVIEW_FOR_LOGGED], message: 'smile_product_review.validators.product.not_blank')]
     public $product;
 
     /**
